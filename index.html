@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afra Chiang | Portfolio</title>
+    <title>Afra CHIANG | Portfolio</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,94 +14,105 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 自定義專業樣式區 --- */
+        /* --- 黑色質感模式 Dark Mode --- */
         
-        /* 全站字體設定 */
         body {
             font-family: 'Roboto', 'Noto Sans TC', sans-serif;
-            background-color: #f8f9fa; /* 極淺灰色背景，比純白更有質感 */
-            color: #333;
+            background-color: #121212; /* 極深灰背景 (接近黑) */
+            color: #e0e0e0; /* 淺灰文字 (比純白不刺眼) */
             line-height: 1.6;
         }
 
-        /* 導覽列調整 */
+        /* 導覽列：改為黑色 */
         .navbar {
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 讓導覽列浮起來的陰影 */
+            background-color: #000000 !important;
+            border-bottom: 1px solid #333;
         }
+        .navbar-brand { color: #fff !important; }
 
-        /* Hero 個人簡介區塊 */
+        /* Hero 區塊：改為深色漸層 */
         .hero-section {
-            /* 使用專業感的深藍漸層背景 */
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            color: white;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             padding: 80px 0;
             margin-bottom: 60px;
+            border-bottom: 1px solid #333;
         }
         
-        /* 圓形大頭照設定 (重要！) */
         .profile-img {
-            width: 160px; /* 寬度 */
-            height: 160px; /* 高度 */
-            object-fit: cover; /* 保持比例裁切 */
-            border-radius: 50%; /* 變圓形 */
-            border: 4px solid rgba(255, 255, 255, 0.3); /* 半透明白邊框 */
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.2);
             margin-bottom: 20px;
         }
 
-        /* 社群連結圖示 */
         .social-icons a {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.6);
             font-size: 1.5rem;
             margin: 0 10px;
             transition: color 0.3s;
         }
-        .social-icons a:hover { color: white; }
+        .social-icons a:hover { color: #3498db; }
 
-        /* 區塊標題裝飾 */
+        /* 標題裝飾 */
         .section-title {
             position: relative;
             margin-bottom: 40px;
             font-weight: 700;
-            color: #2c3e50;
+            color: #ffffff; /* 標題全白 */
             display: inline-block;
         }
-        .section-title::after { /* 標題下方的小藍線 */
+        .section-title::after {
             content: '';
             position: absolute;
             left: 0;
             bottom: -10px;
             width: 100%;
             height: 3px;
-            background-color: #3498db; /* 強調色 */
+            background-color: #3498db; /* 亮藍色裝飾線 */
         }
 
-        /* 專業卡片設計 */
+        /* 卡片：改為深灰色背景 */
         .card {
-            border: none; /* 移除預設邊框 */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* 柔和陰影 */
-            transition: all 0.3s ease; /* 平滑過渡效果 */
+            background-color: #1e1e1e; /* 深灰卡片 */
+            border: 1px solid #333; /* 微弱邊框 */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* 黑色陰影 */
+            transition: all 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-5px); /* 滑鼠移上去稍微上浮 */
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* 加深陰影 */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+            border-color: #555;
         }
-        .card-title { font-weight: 700; color: #2c3e50; }
+        .card-title { color: #fff; font-weight: 700; }
+        .card-text { color: #aaa; } /* 卡片內文淺灰 */
         
-        /* 技能小標籤樣式 */
+        /* 技能標籤：改為深底亮字 */
         .skill-badge {
             font-size: 0.85rem;
-            background-color: #e9ecef;
-            color: #495057;
+            background-color: #333;
+            color: #ddd;
             padding: 4px 10px;
-            border-radius: 20px; /* 膠囊狀 */
+            border-radius: 20px;
             margin-right: 5px;
             display: inline-block;
+            border: 1px solid #444;
+        }
+
+        /* 讓 muted 文字在黑底也能看見 */
+        .text-muted { color: #888 !important; }
+
+        /* 頁尾 */
+        footer {
+            background-color: #000 !important;
+            border-top: 1px solid #333 !important;
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">Yu-Jou Jiang</a>
         </div>
@@ -111,13 +122,9 @@
         <div class="container">
             <img src="images/profile.jpg" alt="江語柔" class="profile-img">
             
-            <h1 class="display-5 fw-bold">江語柔Afra Chiang</h1>
-            <p class="lead mb-4">傳播碩士生 | 專注於社群行銷、數據輿情分析與內容創作</p>
-            
-            <div class="social-icons">
-                <a href="mailto:你的Email" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://linkedin.com/in/你的帳號" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/你的帳號" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <h1 class="display-5 fw-bold text-white">江語柔</h1>
+            <p class="lead mb-4 text-light">大眾傳播研究所 | 社群行銷 • 影音製作 • 輿情分析</p>
+        
             </div>
         </div>
     </header>
@@ -126,7 +133,9 @@
         
         <div class="mb-5">
             <h3 class="section-title">行銷企劃經歷</h3>
-            <div class="row g-4"> <div class="col-md-6 col-lg-4">
+            <div class="row g-4">
+                
+                <div class="col-md-6 col-lg-4">
                     <div class="card h-100 p-3">
                         <div class="card-body">
                             <div class="mb-2">
@@ -134,47 +143,4 @@
                                 <span class="skill-badge">數據分析</span>
                             </div>
                             <h5 class="card-title">LINE 節目行銷實習</h5>
-                            <p class="text-muted small mb-3">2024/07 - 2025/01 | 行銷助理</p>
-                            <p class="card-text">透過 A/B Test 優化貼文素材，並利用數據驅動社群策略，成功提升官方帳號互動率 20%。</p>
-                            <a href="#" target="_blank" class="btn btn-outline-primary stretched-link">查看企劃成果</a>
-                        </div>
-                    </div>
-                </div>
-                
-                </div>
-        </div>
-
-
-        <div class="mb-5">
-            <h3 class="section-title">輿情分析與程式技能</h3>
-            <div class="row g-4">
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3">
-                        <div class="card-body">
-                            <div class="mb-2">
-                                <span class="skill-badge">Python</span>
-                                <span class="skill-badge">NLP 文字探勘</span>
-                            </div>
-                            <h5 class="card-title">Dcard 輿情監測系統</h5>
-                            <p class="text-muted small mb-3">碩士課程專案</p>
-                            <p class="card-text">針對特定品牌議題，自動爬取 Dcard 討論串，運用 Jieba 斷詞與情緒分析套件，產出視覺化文字雲與趨勢報告。</p>
-                            <a href="#" target="_blank" class="btn btn-outline-dark stretched-link">查看 GitHub 程式碼</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-    <footer class="text-center py-5 text-muted bg-white mt-5 border-top">
-        <div class="container">
-            <p class="mb-0">&copy; 2025 Yu-Jou Jiang. Designed for Portfolio.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+                            <p class="text-muted small mb-3">2024/07 -
