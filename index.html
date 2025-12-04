@@ -3,144 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afra CHIANG | Portfolio</title>
+    <title>Afra Chiang | Portfolio</title>
     
+    <!-- 引入 Google Fonts (Noto Sans TC + Roboto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
+    <!-- 引入 Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- 引入 Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 黑色質感模式 Dark Mode --- */
-        
+        /* --- Dark Mode 質感設計 --- */
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #aaaaaa;
+            --accent-color: #0dcaf0; /* 亮藍色強調 */
+        }
+
         body {
             font-family: 'Roboto', 'Noto Sans TC', sans-serif;
-            background-color: #121212; /* 極深灰背景 (接近黑) */
-            color: #e0e0e0; /* 淺灰文字 (比純白不刺眼) */
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.6;
+            padding-top: 70px; /* 避開導覽列 */
         }
 
-        /* 導覽列：改為黑色 */
+        /* 導覽列 */
         .navbar {
-            background-color: #000000 !important;
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid #333;
         }
-        .navbar-brand { color: #fff !important; }
+        .navbar-brand { font-weight: 700; letter-spacing: 1px; }
 
-        /* Hero 區塊：改為深色漸層 */
-        .hero-section {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            padding: 80px 0;
-            margin-bottom: 60px;
-            border-bottom: 1px solid #333;
+        /* 通用區塊設定 */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid #2a2a2a;
         }
-        
-        .profile-img {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 20px;
-        }
-
-        .social-icons a {
-            color: rgba(255,255,255,0.6);
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        .social-icons a:hover { color: #3498db; }
 
         /* 標題裝飾 */
         .section-title {
             position: relative;
             margin-bottom: 40px;
             font-weight: 700;
-            color: #ffffff; /* 標題全白 */
+            color: #fff;
             display: inline-block;
+            padding-bottom: 10px;
         }
         .section-title::after {
             content: '';
             position: absolute;
             left: 0;
-            bottom: -10px;
-            width: 100%;
-            height: 3px;
-            background-color: #3498db; /* 亮藍色裝飾線 */
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
         }
 
-        /* 卡片：改為深灰色背景 */
+        /* 卡片設計 */
         .card {
-            background-color: #1e1e1e; /* 深灰卡片 */
-            border: 1px solid #333; /* 微弱邊框 */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* 黑色陰影 */
-            transition: all 0.3s ease;
+            background-color: var(--bg-card);
+            border: 1px solid #333;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             border-color: #555;
         }
-        .card-title { color: #fff; font-weight: 700; }
-        .card-text { color: #aaa; } /* 卡片內文淺灰 */
-        
-        /* 技能標籤：改為深底亮字 */
-        .skill-badge {
-            font-size: 0.85rem;
+        .card-title { color: #fff; font-weight: 500; }
+        .card-text { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* YouTube 嵌入容器 */
+        .ratio-16x9 { border-radius: 8px; overflow: hidden; }
+        .ratio-9x16 { border-radius: 8px; overflow: hidden; max-width: 350px; margin: 0 auto; } /* Shorts 專用 */
+
+        /* 技能標籤 */
+        .badge-custom {
             background-color: #333;
-            color: #ddd;
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-right: 5px;
-            display: inline-block;
+            color: var(--accent-color);
             border: 1px solid #444;
+            margin-right: 5px;
+            font-weight: normal;
         }
 
-        /* 讓 muted 文字在黑底也能看見 */
-        .text-muted { color: #888 !important; }
-
-        /* 頁尾 */
-        footer {
-            background-color: #000 !important;
-            border-top: 1px solid #333 !important;
+        /* 圖片設定 */
+        img { border-radius: 8px; }
+        .carousel-item img {
+            max-height: 500px;
+            object-fit: cover; /* 保持圖片填滿但不變形 */
         }
     </style>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#navbar-scroll">
 
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar-scroll">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Yu-Jou Jiang</a>
+            <a class="navbar-brand" href="#">AFRA CHIANG</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#video">影音剪輯</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#analysis">輿情分析</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#marketing">社群行銷</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#event">活動企劃</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#extra">研究所作品</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <header class="hero-section text-center">
-        <div class="container">
-            <img src="images/profile.jpg" alt="江語柔" class="profile-img">
-            
-            <h1 class="display-5 fw-bold text-white">江語柔</h1>
-            <p class="lead mb-4 text-light">大眾傳播研究所 | 社群行銷 • 影音製作 • 輿情分析</p>
-        
-            </div>
-        </div>
+    <!-- Hero 簡介區 (可選) -->
+    <header class="container text-center py-5">
+        <h1 class="display-4 fw-bold text-white mb-3">Hi, I'm Afra.</h1>
+        <p class="lead text-muted">專注於 影音內容創作 • 輿情數據分析 • 社群行銷企劃</p>
     </header>
 
-    <div class="container py-4">
-        
-        <div class="mb-5">
-            <h3 class="section-title">行銷企劃經歷</h3>
-            <div class="row g-4">
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3">
+    <!-- 1. 基本美編與剪輯 -->
+    <section id="video">
+        <div class="container">
+            <h2 class="section-title">基本美編與剪輯</h2>
+            
+            <!-- 1-1 影片順剪 -->
+            <h4 class="text-white mb-3 border-start border-4 border-info ps-3">影片順剪與字幕製作</h4>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <div class="card h-100 p-2">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/qcNthl7vGOM" title="Video 1" allowfullscreen></iframe>
+                        </div>
                         <div class="card-body">
-                            <div class="mb-2">
-                                <span class="skill-badge">社群營運</span>
-                                <span class="skill-badge">數據分析</span>
+                            <h5 class="card-title">剪輯作品範例 I</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 p-2">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/ABDGbDcpxoE" title="Video 2" allowfullscreen></iframe>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">剪輯作品範例 II</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1-2 封面輪播 -->
+            <h4 class="text-white mb-3 border-start border-4 border-warning ps-3">影片封面設計 (Thumbnails)</h4>
+            <div class="row mb-5">
+                <div class="col-lg-8 offset-lg-2">
+                    <div id="coverCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#coverCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#coverCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#coverCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner rounded shadow-lg">
+                            <div class="carousel-item active">
+                                <!-- 圖片路徑：images/cover01.jpg -->
+                                <img src="images/cover01.jpg" class="d-block w-100" alt="封面設計1">
                             </div>
-                            <h5 class="card-title">LINE 節目行銷實習</h5>
-                            <p class="text-muted small mb-3">2024/07 -
+                            <div class="carousel-item">
+                                <img src="images/cover02.jpg" class="d-block w-100" alt="封面設計2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/cover03.jpg" class="d-block w-100" alt="封面設計3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#coverCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#coverCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1-3 短影音 -->
+            <h4 class="text-white mb-3 border-start border-4 border-danger ps-3">短影音製作 (Shorts/Reels)</h4>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="ratio ratio-16x9"> <!-- 使用 embed 避免跑版，或改用連結按鈕 -->
+                        <iframe src="https://www.youtube.com/embed/sfNUsOeNDEE" title="Shorts 1" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/eDds5zaOeLo" title="Shorts 2" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/w9S1F5-EYCE" title="Shorts 3" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 輿情分析 -->
+    <section id="analysis">
+        <div class="container">
+            <h2 class="section-title">輿情分析專案</h2>
+            <div class="card p-4">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <h4 class="text-white">品牌聲量監測</h4>
+                        <p class="text-muted">運用 <strong>Keypo 大數據關鍵字引擎</strong>，針對特定議題進行篩選與觀測。</p>
+                        <ul class="text-muted list-unstyled">
+                            <li><i class="fas fa-check text-info me-2"></i>設定精準關鍵字策略</li>
+                            <li><i class="fas fa-check text-info me-2"></i>分析每月聲量趨勢與正負評</li>
+                            <li><i class="fas fa-check text-info me-2"></i>產出視覺化數據簡報</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <img src="images/analyze01.jpg" class="img-fluid border border-secondary" alt="分析圖表1">
+                            </div>
+                            <div class="col-md-6">
+                                <img src="images/analyze02.jpg" class="img-fluid border border-secondary" alt="分析圖表2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 社群行銷 -->
+    <section id="marketing">
+        <div class="container">
+            <h2 class="section-title">社群行銷操作</h2>
+            <p class="text-muted mb-4">YouTube 社群貼文 (Community Post) 操作實例：</p>
+            <div class="row g-4">
+                <!-- 貼文 1 -->
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fab fa-youtube fa-3x text-danger mb-3"></i>
+                            <h5 class="card-title">社群互動貼文 I</h5>
+                            <p class="card-text">提升粉絲黏著度的互動型貼文。</p>
+                            <a href="http://youtube.com/post/Ugkxab9U6UGfwui0kNHGoqKegKjBc1q02sRY?si=_aLP0Sxnh1Fcy3xG" target="_blank" class="btn btn-outline-danger mt-auto">查看貼文</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 貼文 2 -->
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fab fa-youtube fa-3x text-danger mb-3"></i>
+                            <h5 class="card-title">資訊推廣貼文 II</h5>
+                            <p class="card-text">針對新影片上架的宣傳與導流。</p>
+                            <a href="http://youtube.com/post/Ugkx9AOdW3HwGZRpPWFRTE5CvHZcD62iahLo?si=HjRTgBRGScLYE6Cr" target="_blank" class="btn btn-outline-danger mt-auto">查看貼文</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 貼文 3 -->
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-4">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fab fa-youtube fa-3x text-danger mb-3"></i>
+                            <h5 class="card-title">活動宣傳貼文 III</h5>
+                            <p class="card-text">結合時事議題的活動預告。</p>
+                            <a href="http://youtube.com/post/UgkxZv2UsdVoAsKbkc8Yc1H16q1vw3l8Tltp?si=Eq9EIbMK01W1Lqa3" target="_blank" class="btn btn-outline-danger mt-auto">查看貼文</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 活動與內容企劃 -->
+    <section id="event">
+        <div class="container">
+            <h2 class="section-title">活動與內容企劃</h2>
+            
+            <!-- 4-1 Podcast -->
+            <div class="row mb-5 align-items-center bg-dark bg-opacity-50 p-4 rounded border border-secondary">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <h3 class="text-white"><i class="fas fa-microphone-alt me-2"></i>Podcast 頻道製作</h3>
+                    <p class="text-muted">從腳本發想、錄音到後製剪輯的完整音頻節目製作。</p>
+                    <div class="d-flex gap-2">
+                        <a href="https://youtu.be/cM3ZXuV8z64?si=LCbXu3x7UBLKxvYE" target="_blank" class="btn btn-danger"><i class="fab fa-youtube me-2"></i>YouTube 收聽</a>
+                        <a href="https://open.spotify.com/show/0q4rx2lGXFQH0NhHeDNNCy?si=8fdfc7453222453f" target="_blank" class="btn btn-success"><i class="fab fa-spotify me-2"></i>Spotify 收聽</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- 這裡直接嵌入 YouTube 影片 -->
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/cM3ZXuV8z64" title="Podcast" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4-2 實體活動 -->
+            <h4 class="text-white mb-4">實體活動規劃</h4>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <img src="images/Activity01.jpg" class="card-img-top" style="height: 250px; object-fit: cover;" alt="營隊活動">
+                        <div class="card-body">
+                            <h5 class="card-title">3天營隊活動籌辦</h5>
+                            <p class="card-text">負責活動流程設計、工作人員調度與場地規劃，打造沈浸式的營隊體驗。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <img src="images/Activity02.jpg" class="card-img-top" style="height: 250px; object-fit: cover;" alt="歌唱活動">
+                        <div class="card-body">
+                            <h5 class="card-title">系上歌唱比賽 (規模80人)</h5>
+                            <p class="card-text">統籌燈光音響設備、賽制規劃與現場控場，成功舉辦 80 人規模的大型系所活動。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 研究所額外作品 -->
+    <section id="extra">
+        <div class="container">
+            <h2 class="section-title">研究所額外作品</h2>
+            
+            <!-- 5-1 Python & PowerBI -->
+            <div class="mb-5">
+                <div class="d-flex align-items-center mb-3">
+                    <h4 class="text-white mb-0 me-3">Python 數據分析與 Power BI 視覺化</h4>
+                    <span class="badge badge-custom">Python</span>
+                    <span class="badge badge-custom">Power BI</span>
+                </div>
+                <p class="text-muted mb-4">運用 Python 網路爬蟲技術爬梳社會議題資料，進行資料清洗與分析，並導入 Power BI 產出互動式視覺化儀表板。</p>
+                
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <img src="images/python01.jpg" class="img-fluid rounded border border-secondary" alt="Python作品1">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/python02.jpg" class="img-fluid rounded border border-secondary" alt="Python作品2">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/python03.jpg" class="img-fluid rounded border border-secondary" alt="Python作品3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5-2 網站製作 -->
+            <div class="card bg-transparent border-dashed border-secondary text-center p-5">
+                <div class="card-body">
+                    <i class="fas fa-code fa-2x text-muted mb-3"></i>
+                    <h4 class="text-white">個人網站製作</h4>
+                    <p class="text-muted">運用 HTML, CSS, Bootstrap 架設響應式個人作品集網站（就是你現在看到的這一個！）</p>
+                    <span class="badge bg-secondary">Coming Soon... and It's Here!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="text-center py-5 mt-5" style="background-color: #000; border-top: 1px solid #333;">
+        <div class="container">
+            <h4 class="text-white mb-3">Afra Chiang</h4>
+            <div class="mb-4">
+                <a href="mailto:your-email@example.com" class="text-muted mx-2 fs-5"><i class="fas fa-envelope"></i></a>
+                <a href="#" class="text-muted mx-2 fs-5"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="text-muted small">&copy; 2025 Afra Chiang. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
